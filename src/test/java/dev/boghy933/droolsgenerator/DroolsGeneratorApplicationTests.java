@@ -1,5 +1,6 @@
 package dev.boghy933.droolsgenerator;
 
+import dev.boghy933.droolsgenerator.drools.GenerateRules;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -7,7 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 class DroolsGeneratorApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void generateDroolsRule() {
+		GenerateRules generateRules = new GenerateRules();
+		generateRules.generateRules();
 	}
 
 }

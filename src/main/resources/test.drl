@@ -1,0 +1,14 @@
+package dev.boghy933.droolsgenerator 
+
+rule "Bronze - business is low profile"
+when
+    (
+    $foo : Foo( bar==baz, x>y )  and
+    not( 
+    Bar( a+b==c )   ) ) 
+then
+System.out.println();
+
+end
+
+
