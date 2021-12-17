@@ -1,12 +1,16 @@
-package dev.boghy933.drools.rules
+package dev.boghy933.drools.rules 
 
 import dev.boghy933.droolsgenerator.dto.Business
 import dev.boghy933.droolsgenerator.dto.BusinessType
 
-rule "Priority: 1.0 Name: Bronze - business is low profile"
+rule "Priority: 1.0 - Bronze - business is low profile"
 when
+    
     $business : Business( $business.getExpense() > 0, $business.getExpense() < 2000 )   
 then
 	$business.setBusinessType(BusinessType.BRONZE); 
  	$business.setAppliedRule("1.0");
+
 end
+
+

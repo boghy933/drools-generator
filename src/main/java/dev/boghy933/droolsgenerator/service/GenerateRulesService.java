@@ -1,11 +1,11 @@
-package dev.boghy933.droolsgenerator.drools;
+package dev.boghy933.droolsgenerator.service;
 
 import dev.boghy933.droolsgenerator.entity.Action;
 import dev.boghy933.droolsgenerator.entity.Condition;
 import dev.boghy933.droolsgenerator.entity.Rule;
-import org.drools.compiler.lang.DrlDumper;
 import org.drools.compiler.lang.api.DescrFactory;
 import org.drools.compiler.lang.descr.PackageDescr;
+import org.drools.mvel.DrlDumper;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,11 +21,13 @@ import java.io.FileWriter;
  * https://github.com/eugenp/tutorials/blob/master/drools/src/main/resources/courseSchedule.drl
  * https://www.baeldung.com/drools-excel
  * https://docs.jboss.org/drools/release/5.2.0.Final/drools-expert-docs/html/ch05.html
+ * How to add multiple rules: https://stackoverflow.com/questions/51210009/drools-package-name-fluent-api
+ * Example of fluent api: https://github.com/kiegroup/drools/blob/6.3.x/drools-compiler/src/test/java/org/drools/compiler/lang/api/DescrBuilderTest.java#L451-L465
  */
 
-public class GenerateRules {
+public class GenerateRulesService {
     public void generateRules() {
-        Rule rule = new Rule(1, "Bronze - business is low profile", null, null);
+        Rule rule = new Rule(1, "Priority: 1.0 - Bronze - business is low profile", null, null);
 
         // $business:Business
         Condition condition1 = new Condition(1, 1, "$business.getExpense() > 0 ");
@@ -36,16 +38,24 @@ public class GenerateRules {
 
         // https://docs.jboss.org/drools/release/5.2.0.Final/droolsjbpm-introduction-docs/html/ch02.html
         PackageDescr pkg = DescrFactory.newPackage()
-                .name("dev.boghy933.droolsgenerator")
+                .name("dev.boghy933.drools.rules")
+                    .newImport()
+                        .target("dev.boghy933.droolsgenerator.dto.Business")
+                    .end()
+                    .newImport()
+                        .target("dev.boghy933.droolsgenerator.dto.BusinessType")
+                    .end()
                 .newRule().name(rule.getName())
                     //.attribute("ruleflow-grou","bla")
                 .lhs()
                     .and()
-                        .pattern("Foo").id( "$foo", false ).constraint("bar==baz").constraint("x>y").end()
-                        .not().pattern("Bar").constraint("a+b==c").end().end()
+                        .pattern("Business").id( "$business", false ).constraint("$business.getExpense() > 0").constraint("$business.getExpense() < 2000").end()
+                        // .not().pattern("Bar").constraint("a+b==c").end().end()
                     .end()
                 .end()
-                .rhs( "System.out.println();" ).end()
+                .rhs( "\t$business.setBusinessType(BusinessType.BRONZE); \n \t$business.setAppliedRule(\"1.0\");" )
+                //.namedRhs("$business.setBusinessType(BusinessType.BRONZE)", "$business.setAppliedRule(1)")
+                .end()
                 .getDescr();
 
         DrlDumper dumper=new DrlDumper();
@@ -55,7 +65,7 @@ public class GenerateRules {
         // https://stackoverflow.com/questions/27522711/is-there-any-api-in-drools-to-create-the-drl-files-dynamically-by-just-passing-v
         try{
             // create new file
-            File file = new File("src/main/resources/test.drl");
+            File file = new File("src/main/resources/generated/test.drl");
             file.createNewFile();
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);

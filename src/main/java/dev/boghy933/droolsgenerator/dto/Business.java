@@ -10,6 +10,15 @@ public class Business {
     private BusinessType businessType;
     private String appliedRule;
 
+    public Business(Long id, String name, int expense, Timestamp birthDate, BusinessType businessType, String appliedRule) {
+        this.id = id;
+        this.name = name;
+        this.expense = expense;
+        this.birthDate = birthDate;
+        this.businessType = businessType;
+        this.appliedRule = appliedRule;
+    }
+
     public Long getId() {
         return id;
     }

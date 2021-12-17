@@ -1,5 +1,5 @@
 package dev.boghy933.droolsgenerator.dto;
 
-enum BusinessType {
+public enum BusinessType {
     BRONZE, SILVER, GOLD, DIAMOND
 }
