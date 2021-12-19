@@ -3,13 +3,47 @@ package dev.boghy933.drools.rules
 import dev.boghy933.droolsgenerator.dto.Business
 import dev.boghy933.droolsgenerator.dto.BusinessType
 
-rule "Priority: 1.0 - Bronze - business is low profile"
+rule "Set Bronze"
 when
     
-    $business : Business( $business.getExpense() > 0, $business.getExpense() < 2000 )   
+    $business : Business( $business.getExpense() > 0, $business.getExpense() <= 10000 )   
 then
-	$business.setBusinessType(BusinessType.BRONZE); 
- 	$business.setAppliedRule("1.0");
+	
+	$business.setBusinessType(BusinessType.BRONZE);
+	$business.setAppliedRule("1.0-BRONZE");
+
+end
+
+rule "Set Silver"
+when
+    
+    $business : Business( $business.getExpense() > 10000, $business.getExpense() <= 20000 )   
+then
+	
+	$business.setBusinessType(BusinessType.SILVER);
+	$business.setAppliedRule("2.0-SILVER");
+
+end
+
+rule "Set Gold"
+when
+    
+    $business : Business( $business.getExpense() > 20000, $business.getExpense() <= 30000 )   
+then
+	
+	$business.setBusinessType(BusinessType.GOLD);
+	$business.setAppliedRule("3.0-GOLD");
+
+end
+
+rule "Set Diamond"
+when
+    
+    $business : Business( $business.getExpense() > 30000 )   
+then
+	
+	$business.setBusinessType(BusinessType.DIAMOND);
+	$business.setAppliedRule("4.0-DIAMOND");
 
 end
 
