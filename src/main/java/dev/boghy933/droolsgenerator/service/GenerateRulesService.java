@@ -27,6 +27,7 @@ import java.util.List;
  * https://docs.jboss.org/drools/release/5.2.0.Final/drools-expert-docs/html/ch05.html
  * How to add multiple rules: https://stackoverflow.com/questions/51210009/drools-package-name-fluent-api
  * Example of fluent api: https://github.com/kiegroup/drools/blob/6.3.x/drools-compiler/src/test/java/org/drools/compiler/lang/api/DescrBuilderTest.java#L451-L465
+ * Check if list contains: https://stackoverflow.com/questions/28326953/drools-check-if-exists-contains-string-in-a-liststring
  */
 
 public class GenerateRulesService {
