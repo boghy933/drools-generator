@@ -69,11 +69,14 @@ public class GenerateRulesService {
 
         constraintsSilver.add("$business.getExpense() > 10000");
         constraintsSilver.add("$business.getExpense() <= 20000");
+        constraintsSilver.add("$business.getExpense() <= 20000");
+        constraintsSilver.add("[\"Silver Company\", \"Gold Company\"] contains $business.getName()");
         rhsSilver.add("$business.setBusinessType(BusinessType.SILVER);");
         rhsSilver.add("$business.setAppliedRule(\"2.0-SILVER\");");
 
         constraintsGold.add("$business.getExpense() > 20000");
         constraintsGold.add("$business.getExpense() <= 30000");
+        constraintsGold.add("$business.getName() in (\"Silver Company\", \"Gold Company\")");
         rhsGold.add("$business.setBusinessType(BusinessType.GOLD);");
         rhsGold.add("$business.setAppliedRule(\"3.0-GOLD\");");
 

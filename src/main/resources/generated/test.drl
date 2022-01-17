@@ -17,7 +17,7 @@ end
 rule "Set Silver"
 when
     
-    $business : Business( $business.getExpense() > 10000, $business.getExpense() <= 20000 )   
+    $business : Business( $business.getExpense() > 10000, $business.getExpense() <= 20000, $business.getExpense() <= 20000, ["Silver Company", "Gold Company"] contains $business.getName() )   
 then
 	
 	$business.setBusinessType(BusinessType.SILVER);
@@ -28,7 +28,7 @@ end
 rule "Set Gold"
 when
     
-    $business : Business( $business.getExpense() > 20000, $business.getExpense() <= 30000 )   
+    $business : Business( $business.getExpense() > 20000, $business.getExpense() <= 30000, $business.getName() in ("Silver Company", "Gold Company") )   
 then
 	
 	$business.setBusinessType(BusinessType.GOLD);
