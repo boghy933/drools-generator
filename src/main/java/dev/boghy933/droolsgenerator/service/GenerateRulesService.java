@@ -1,13 +1,7 @@
 package dev.boghy933.droolsgenerator.service;
 
-import dev.boghy933.droolsgenerator.entity.Action;
-import dev.boghy933.droolsgenerator.entity.Condition;
 import dev.boghy933.droolsgenerator.entity.Rule;
 import dev.boghy933.droolsgenerator.factory.DroolsFactory;
-import org.drools.compiler.lang.api.*;
-import org.drools.compiler.lang.api.impl.CEDescrBuilderImpl;
-import org.drools.compiler.lang.descr.PackageDescr;
-import org.drools.mvel.DrlDumper;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -32,14 +26,14 @@ import java.util.List;
 
 public class GenerateRulesService {
     public void generateRules() {
-        Rule rule = new Rule(1, "Priority: 1.0 - Bronze - business is low profile", null, null);
+/*        Rule rule = new Rule(1, "Priority: 1.0 - Bronze - business is low profile", null, null);
 
         // $business:Business
         Condition condition1 = new Condition(1, 1, "$business.getExpense() > 0");
         Condition condition2 = new Condition(2, 1, "$business.getExpense() < 2000");
 
         Action action1 = new Action(1,1, "$business.setBusinessType(BusinessType.BRONZE)");
-        Action action2 = new Action(1,2, "$business.setAppliedRule(1)");
+        Action action2 = new Action(1,2, "$business.setAppliedRule(1)");*/
 
         //PackageDescrBuilder rulePackage = DescrFactory.newPackage();
 
@@ -69,6 +63,7 @@ public class GenerateRulesService {
 
         constraintsBronze.add("$business.getExpense() > 0");
         constraintsBronze.add("$business.getExpense() <= 10000");
+        constraintsBronze.add("$business.getActiveYears() contains 2020");
         rhsBronze.add("$business.setBusinessType(BusinessType.BRONZE);");
         rhsBronze.add("$business.setAppliedRule(\"1.0-BRONZE\");");
 

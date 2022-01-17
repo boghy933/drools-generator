@@ -6,7 +6,7 @@ import dev.boghy933.droolsgenerator.dto.BusinessType
 rule "Set Bronze"
 when
     
-    $business : Business( $business.getExpense() > 0, $business.getExpense() <= 10000 )   
+    $business : Business( $business.getExpense() > 0, $business.getExpense() <= 10000, $business.getActiveYears() contains 2020 )   
 then
 	
 	$business.setBusinessType(BusinessType.BRONZE);

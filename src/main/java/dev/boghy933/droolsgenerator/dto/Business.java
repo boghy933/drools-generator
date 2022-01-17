@@ -1,6 +1,7 @@
 package dev.boghy933.droolsgenerator.dto;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Business {
     private Long id;
@@ -9,14 +10,16 @@ public class Business {
     private Timestamp birthDate;
     private BusinessType businessType;
     private String appliedRule;
+    private List<Integer> activeYears;
 
-    public Business(Long id, String name, int expense, Timestamp birthDate, BusinessType businessType, String appliedRule) {
+    public Business(Long id, String name, int expense, Timestamp birthDate, BusinessType businessType, String appliedRule, List<Integer> activeYears) {
         this.id = id;
         this.name = name;
         this.expense = expense;
         this.birthDate = birthDate;
         this.businessType = businessType;
         this.appliedRule = appliedRule;
+        this.activeYears = activeYears;
     }
 
     public Long getId() {
@@ -65,5 +68,13 @@ public class Business {
 
     public void setAppliedRule(String appliedRule) {
         this.appliedRule = appliedRule;
+    }
+
+    public List<Integer> getActiveYears() {
+        return activeYears;
+    }
+
+    public void setActiveYears(List<Integer> activeYears) {
+        this.activeYears = activeYears;
     }
 }

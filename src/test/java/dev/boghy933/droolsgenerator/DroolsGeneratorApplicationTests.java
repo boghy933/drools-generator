@@ -10,6 +10,9 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.junit.jupiter.api.Order;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -28,13 +31,19 @@ class DroolsGeneratorApplicationTests {
 	@Test
 	@Order(2)
 	void testBronze() {
-
-		Business business = new Business(Long.valueOf(1), "Bronze Company", 5000, null, null, null);
+		List<Integer> activeYears = new ArrayList<Integer>();
+		activeYears.add(2019);
+		activeYears.add(2020);
+		activeYears.add(2021);
+		Business business = new Business(Long.valueOf(1), "Bronze Company", 5000, null, null, null, activeYears);
 		business = businessService.suggestType(business);
 		assertEquals(business.getBusinessType(), BusinessType.BRONZE);
 		assertEquals(business.getAppliedRule(), "1.0-BRONZE");
-
-		business = new Business(Long.valueOf(1), "Bronze Company", 10000, null, null, null);
+		activeYears = new ArrayList<Integer>();
+		activeYears.add(2019);
+		activeYears.add(2021);
+		activeYears.add(2020);
+		business = new Business(Long.valueOf(1), "Bronze Company", 10000, null, null, null, activeYears);
 		business = businessService.suggestType(business);
 		assertEquals(business.getBusinessType(), BusinessType.BRONZE);
 		assertEquals(business.getAppliedRule(), "1.0-BRONZE");
@@ -43,12 +52,12 @@ class DroolsGeneratorApplicationTests {
 	@Test
 	@Order(2)
 	void testSilver() {
-		Business business = new Business(Long.valueOf(1), "Silver Company", 11000, null, null, null);
+		Business business = new Business(Long.valueOf(1), "Silver Company", 11000, null, null, null, null);
 		business = businessService.suggestType(business);
 		assertEquals(business.getBusinessType(), BusinessType.SILVER);
 		assertEquals(business.getAppliedRule(), "2.0-SILVER");
 
-		business = new Business(Long.valueOf(1), "Silver Company", 20000, null, null, null);
+		business = new Business(Long.valueOf(1), "Silver Company", 20000, null, null, null, null);
 		business = businessService.suggestType(business);
 		assertEquals(business.getBusinessType(), BusinessType.SILVER);
 		assertEquals(business.getAppliedRule(), "2.0-SILVER");
@@ -57,7 +66,7 @@ class DroolsGeneratorApplicationTests {
 	@Test
 	@Order(2)
 	void testGold() {
-		Business business = new Business(Long.valueOf(1), "Gold Company", 25000, null, null, null);
+		Business business = new Business(Long.valueOf(1), "Gold Company", 25000, null, null, null, null);
 		business = businessService.suggestType(business);
 		assertEquals(business.getBusinessType(), BusinessType.GOLD);
 		assertEquals(business.getAppliedRule(), "3.0-GOLD");
@@ -66,7 +75,7 @@ class DroolsGeneratorApplicationTests {
 	@Test
 	@Order(2)
 	void testDiamond() {
-		Business business = new Business(Long.valueOf(1), "Diamond Company", 50000, null, null, null);
+		Business business = new Business(Long.valueOf(1), "Diamond Company", 50000, null, null, null, null);
 		business = businessService.suggestType(business);
 		assertEquals(business.getBusinessType(), BusinessType.DIAMOND);
 		assertEquals(business.getAppliedRule(), "4.0-DIAMOND");
