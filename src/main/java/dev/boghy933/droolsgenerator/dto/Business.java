@@ -1,18 +1,19 @@
 package dev.boghy933.droolsgenerator.dto;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 public class Business {
     private Long id;
     private String name;
     private int expense;
-    private Timestamp birthDate;
+    private Date birthDate;
     private BusinessType businessType;
     private String appliedRule;
     private List<Integer> activeYears;
 
-    public Business(Long id, String name, int expense, Timestamp birthDate, BusinessType businessType, String appliedRule, List<Integer> activeYears) {
+    public Business(Long id, String name, int expense, Date birthDate, BusinessType businessType, String appliedRule, List<Integer> activeYears) {
         this.id = id;
         this.name = name;
         this.expense = expense;
@@ -46,11 +47,11 @@ public class Business {
         this.expense = expense;
     }
 
-    public Timestamp getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Timestamp birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 

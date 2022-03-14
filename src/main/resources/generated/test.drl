@@ -2,11 +2,12 @@ package dev.boghy933.drools.rules
 
 import dev.boghy933.droolsgenerator.dto.Business
 import dev.boghy933.droolsgenerator.dto.BusinessType
+import org.drools.core.util.DateUtils
 
 rule "Set Bronze"
 when
     
-    $business : Business( $business.getExpense() > 0, $business.getExpense() <= 10000, $business.getActiveYears() contains 2020 )   
+    $business : Business( $business.getExpense() > 0, $business.getExpense() <= 10000, $business.getActiveYears() contains 2020, $business.getBirthDate().compareTo(DateUtils.parseDate("10-Jul-2019")) > 0 )   
 then
 	
 	$business.setBusinessType(BusinessType.BRONZE);
