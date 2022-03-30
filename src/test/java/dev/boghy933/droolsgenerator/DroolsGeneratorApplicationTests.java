@@ -42,33 +42,34 @@ class DroolsGeneratorApplicationTests {
 
 		// DateUtils.format("");
 
-		Date birthDate = Date.from(LocalDate.of( 2020 , 2 , 11 ).atStartOfDay(ZoneId.of( "Europe/Rome" )).toInstant());
-
-
+		Date birthDate = Date.from(LocalDate.of( 2004, 03, 30 ).atStartOfDay(ZoneId.of( "Europe/Rome" )).toInstant());
 		Business business = new Business(Long.valueOf(1), "Bronze Company", 5000, birthDate, null, null, activeYears);
 		business = businessService.suggestType(business);
-		assertEquals(business.getBusinessType(), BusinessType.BRONZE);
-		assertEquals(business.getAppliedRule(), "1.0-BRONZE");
+		assertEquals(BusinessType.BRONZE, business.getBusinessType());
+		assertEquals("1.0-BRONZE", business.getAppliedRule());
+
 		activeYears = new ArrayList<Integer>();
 		activeYears.add(2019);
 		activeYears.add(2021);
 		activeYears.add(2020);
-		Date birthDate2 = Date.from(LocalDate.of( 2021 , 2 , 11 ).atStartOfDay(ZoneId.of( "Europe/Rome" )).toInstant());
+		Date birthDate2 = Date.from(LocalDate.of( 1990, 3 , 25 ).atStartOfDay(ZoneId.of( "Europe/Rome" )).toInstant());
 		business = new Business(Long.valueOf(1), "Bronze Company", 10000, birthDate2, null, null, activeYears);
 		business = businessService.suggestType(business);
-		assertEquals(business.getBusinessType(), BusinessType.BRONZE);
-		assertEquals(business.getAppliedRule(), "1.0-BRONZE");
+		assertEquals(BusinessType.BRONZE, business.getBusinessType());
+		assertEquals("1.0-BRONZE", business.getAppliedRule());
 	}
 
 	@Test
 	@Order(2)
 	void testSilver() {
-		Business business = new Business(Long.valueOf(1), "Silver Company", 11000, null, null, null, null);
+		Date birthDate = Date.from(LocalDate.of( 2020 , 2 , 11 ).atStartOfDay(ZoneId.of( "Europe/Rome" )).toInstant());
+		Business business = new Business(Long.valueOf(1), "Silver Company", 11000, birthDate, null, null, null);
 		business = businessService.suggestType(business);
 		assertEquals(business.getBusinessType(), BusinessType.SILVER);
 		assertEquals(business.getAppliedRule(), "2.0-SILVER");
 
-		business = new Business(Long.valueOf(1), "Silver Company", 20000, null, null, null, null);
+		Date birthDate2 = Date.from(LocalDate.of( 2021 , 2 , 11 ).atStartOfDay(ZoneId.of( "Europe/Rome" )).toInstant());
+		business = new Business(Long.valueOf(1), "Silver Company", 20000, birthDate2, null, null, null);
 		business = businessService.suggestType(business);
 		assertEquals(business.getBusinessType(), BusinessType.SILVER);
 		assertEquals(business.getAppliedRule(), "2.0-SILVER");

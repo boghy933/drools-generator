@@ -64,20 +64,22 @@ public class GenerateRulesService {
         constraintsBronze.add("$business.getExpense() > 0");
         constraintsBronze.add("$business.getExpense() <= 10000");
         constraintsBronze.add("$business.getActiveYears() contains 2020");
+        constraintsBronze.add("CommonDrools.ageBetween($business.getBirthDate(), 18, 35)");
         rhsBronze.add("$business.setBusinessType(BusinessType.BRONZE);");
         rhsBronze.add("$business.setAppliedRule(\"1.0-BRONZE\");");
-
-        // It returns the value 0 if the argument Date is equal to this Date.
-        // It returns a value less than 0 if this Date is before the Date argument.
-        // It returns a value greater than 0 if this Date is after the Date argument.
-        constraintsBronze.add("$business.getBirthDate().compareTo(DateUtils.parseDate(\"10-Jul-2019\")) > 0");
 
         constraintsSilver.add("$business.getExpense() > 10000");
         constraintsSilver.add("$business.getExpense() <= 20000");
         constraintsSilver.add("$business.getExpense() <= 20000");
         constraintsSilver.add("[\"Silver Company\", \"Gold Company\"] contains $business.getName()");
+        // It returns the value 0 if the argument Date is equal to this Date.
+        // It returns a value less than 0 if this Date is before the Date argument.
+        // It returns a value greater than 0 if this Date is after the Date argument.
+        constraintsSilver.add("$business.getBirthDate().compareTo(DateUtils.parseDate(\"10-Jul-2019\")) > 0");
+
         rhsSilver.add("$business.setBusinessType(BusinessType.SILVER);");
         rhsSilver.add("$business.setAppliedRule(\"2.0-SILVER\");");
+
 
         constraintsGold.add("$business.getExpense() > 20000");
         constraintsGold.add("$business.getExpense() <= 30000");
@@ -95,6 +97,7 @@ public class GenerateRulesService {
         droolsFactory.newImport("dev.boghy933.droolsgenerator.dto.Business");
         droolsFactory.newImport("dev.boghy933.droolsgenerator.dto.BusinessType");
         droolsFactory.newImport("org.drools.core.util.DateUtils");
+        droolsFactory.newImport("dev.boghy933.droolsgenerator.utils.CommonDrools");
 
         droolsFactory.setRule("Set Bronze", "Business", "$business", constraintsBronze, rhsBronze);
         droolsFactory.setRule("Set Silver", "Business", "$business", constraintsSilver, rhsSilver);

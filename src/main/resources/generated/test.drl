@@ -3,11 +3,12 @@ package dev.boghy933.drools.rules
 import dev.boghy933.droolsgenerator.dto.Business
 import dev.boghy933.droolsgenerator.dto.BusinessType
 import org.drools.core.util.DateUtils
+import dev.boghy933.droolsgenerator.utils.CommonDrools
 
 rule "Set Bronze"
 when
     
-    $business : Business( $business.getExpense() > 0, $business.getExpense() <= 10000, $business.getActiveYears() contains 2020, $business.getBirthDate().compareTo(DateUtils.parseDate("10-Jul-2019")) > 0 )   
+    $business : Business( $business.getExpense() > 0, $business.getExpense() <= 10000, $business.getActiveYears() contains 2020, CommonDrools.ageBetween($business.getBirthDate(), 18, 35) )   
 then
 	
 	$business.setBusinessType(BusinessType.BRONZE);
@@ -18,7 +19,7 @@ end
 rule "Set Silver"
 when
     
-    $business : Business( $business.getExpense() > 10000, $business.getExpense() <= 20000, $business.getExpense() <= 20000, ["Silver Company", "Gold Company"] contains $business.getName() )   
+    $business : Business( $business.getExpense() > 10000, $business.getExpense() <= 20000, $business.getExpense() <= 20000, ["Silver Company", "Gold Company"] contains $business.getName(), $business.getBirthDate().compareTo(DateUtils.parseDate("10-Jul-2019")) > 0 )   
 then
 	
 	$business.setBusinessType(BusinessType.SILVER);
