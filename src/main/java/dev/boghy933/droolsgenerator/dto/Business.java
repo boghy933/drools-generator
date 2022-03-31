@@ -12,8 +12,9 @@ public class Business {
     private BusinessType businessType;
     private String appliedRule;
     private List<Integer> activeYears;
+    private boolean disabled;
 
-    public Business(Long id, String name, int expense, Date birthDate, BusinessType businessType, String appliedRule, List<Integer> activeYears) {
+    public Business(Long id, String name, int expense, Date birthDate, BusinessType businessType, String appliedRule, List<Integer> activeYears, boolean disabled) {
         this.id = id;
         this.name = name;
         this.expense = expense;
@@ -21,6 +22,7 @@ public class Business {
         this.businessType = businessType;
         this.appliedRule = appliedRule;
         this.activeYears = activeYears;
+        this.disabled = disabled;
     }
 
     public Long getId() {
@@ -77,5 +79,13 @@ public class Business {
 
     public void setActiveYears(List<Integer> activeYears) {
         this.activeYears = activeYears;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 }

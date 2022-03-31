@@ -8,7 +8,7 @@ import dev.boghy933.droolsgenerator.utils.CommonDrools
 rule "Set Bronze"
 when
     
-    $business : Business( $business.getExpense() > 0, $business.getExpense() <= 10000, $business.getActiveYears() contains 2020, CommonDrools.ageBetween($business.getBirthDate(), 18, 35) )   
+    $business : Business( $business.getExpense() > 0, $business.getExpense() <= 10000, $business.getActiveYears() contains 2020, CommonDrools.ageBetween($business.getBirthDate(), 18, 35), $business.isDisabled() == false )   
 then
 	
 	$business.setBusinessType(BusinessType.BRONZE);

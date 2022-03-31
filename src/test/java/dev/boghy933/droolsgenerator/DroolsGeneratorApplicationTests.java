@@ -43,7 +43,7 @@ class DroolsGeneratorApplicationTests {
 		// DateUtils.format("");
 
 		Date birthDate = Date.from(LocalDate.of( 2004, 03, 30 ).atStartOfDay(ZoneId.of( "Europe/Rome" )).toInstant());
-		Business business = new Business(Long.valueOf(1), "Bronze Company", 5000, birthDate, null, null, activeYears);
+		Business business = new Business(Long.valueOf(1), "Bronze Company", 5000, birthDate, null, null, activeYears, false);
 		business = businessService.suggestType(business);
 		assertEquals(BusinessType.BRONZE, business.getBusinessType());
 		assertEquals("1.0-BRONZE", business.getAppliedRule());
@@ -53,7 +53,7 @@ class DroolsGeneratorApplicationTests {
 		activeYears.add(2021);
 		activeYears.add(2020);
 		Date birthDate2 = Date.from(LocalDate.of( 1990, 3 , 25 ).atStartOfDay(ZoneId.of( "Europe/Rome" )).toInstant());
-		business = new Business(Long.valueOf(1), "Bronze Company", 10000, birthDate2, null, null, activeYears);
+		business = new Business(Long.valueOf(1), "Bronze Company", 10000, birthDate2, null, null, activeYears, false);
 		business = businessService.suggestType(business);
 		assertEquals(BusinessType.BRONZE, business.getBusinessType());
 		assertEquals("1.0-BRONZE", business.getAppliedRule());
@@ -63,13 +63,13 @@ class DroolsGeneratorApplicationTests {
 	@Order(2)
 	void testSilver() {
 		Date birthDate = Date.from(LocalDate.of( 2020 , 2 , 11 ).atStartOfDay(ZoneId.of( "Europe/Rome" )).toInstant());
-		Business business = new Business(Long.valueOf(1), "Silver Company", 11000, birthDate, null, null, null);
+		Business business = new Business(Long.valueOf(1), "Silver Company", 11000, birthDate, null, null, null, false);
 		business = businessService.suggestType(business);
 		assertEquals(business.getBusinessType(), BusinessType.SILVER);
 		assertEquals(business.getAppliedRule(), "2.0-SILVER");
 
 		Date birthDate2 = Date.from(LocalDate.of( 2021 , 2 , 11 ).atStartOfDay(ZoneId.of( "Europe/Rome" )).toInstant());
-		business = new Business(Long.valueOf(1), "Silver Company", 20000, birthDate2, null, null, null);
+		business = new Business(Long.valueOf(1), "Silver Company", 20000, birthDate2, null, null, null,false);
 		business = businessService.suggestType(business);
 		assertEquals(business.getBusinessType(), BusinessType.SILVER);
 		assertEquals(business.getAppliedRule(), "2.0-SILVER");
@@ -78,7 +78,7 @@ class DroolsGeneratorApplicationTests {
 	@Test
 	@Order(2)
 	void testGold() {
-		Business business = new Business(Long.valueOf(1), "Gold Company", 25000, null, null, null, null);
+		Business business = new Business(Long.valueOf(1), "Gold Company", 25000, null, null, null, null,false);
 		business = businessService.suggestType(business);
 		assertEquals(business.getBusinessType(), BusinessType.GOLD);
 		assertEquals(business.getAppliedRule(), "3.0-GOLD");
@@ -87,7 +87,7 @@ class DroolsGeneratorApplicationTests {
 	@Test
 	@Order(2)
 	void testDiamond() {
-		Business business = new Business(Long.valueOf(1), "Diamond Company", 50000, null, null, null, null);
+		Business business = new Business(Long.valueOf(1), "Diamond Company", 50000, null, null, null, null,false);
 		business = businessService.suggestType(business);
 		assertEquals(business.getBusinessType(), BusinessType.DIAMOND);
 		assertEquals(business.getAppliedRule(), "4.0-DIAMOND");

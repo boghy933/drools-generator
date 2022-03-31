@@ -65,6 +65,7 @@ public class GenerateRulesService {
         constraintsBronze.add("$business.getExpense() <= 10000");
         constraintsBronze.add("$business.getActiveYears() contains 2020");
         constraintsBronze.add("CommonDrools.ageBetween($business.getBirthDate(), 18, 35)");
+        constraintsBronze.add("$business.isDisabled() == false");
         rhsBronze.add("$business.setBusinessType(BusinessType.BRONZE);");
         rhsBronze.add("$business.setAppliedRule(\"1.0-BRONZE\");");
 
