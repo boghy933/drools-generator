@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class CommonDrools {
 
-    public static boolean ageBetween(Date birthDate, Integer start, Integer end) {
+    public static boolean ageBetween(Date birthDate, Integer startAge, Integer endAge) {
         LocalDate birthDateLocalDate = Instant.ofEpochMilli(birthDate.getTime())
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
@@ -30,10 +30,10 @@ public class CommonDrools {
         System.out.println("now day: " + LocalDate.now().getDayOfMonth());
 
         System.out.println("Years: " + years);
-        System.out.println("start: " + start);
-        System.out.println("end: " + end);
+        System.out.println("startAge: " + startAge);
+        System.out.println("endAge: " + endAge);
 
-        if (years >= start && years <= end) {
+        if (years >= startAge && years <= endAge) {
             System.out.println("Age is ok");
             return true;
         }
